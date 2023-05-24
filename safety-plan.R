@@ -99,8 +99,6 @@ server <- function(input, output, session) {
                 df = reactive(df_filter()), 
                 vbl = reactive(input$severity))
   
-  
-  
 }
 
 shinyApp(ui, server)
