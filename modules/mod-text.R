@@ -25,5 +25,4 @@ chart_text_server <- function(id, df, vbl) {
     })
     
   })
-  
 }
