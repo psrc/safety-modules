@@ -35,7 +35,8 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel = sidebarPanel(
       br(),
-      selectInput("severity", "Select Severity Type", 
+      selectInput("severity", 
+                  "Select Severity Type", 
                   choices = unique(collision_data$injury_type),
                   selected = "Traffic Related Deaths"
       ),
@@ -85,11 +86,18 @@ server <- function(input, output, session) {
   
   footer_server('psrcfooter')
   
-  output$bn_title <- renderText({paste(input$severity, "Collisions")})
-
-  df_filter <- reactive({collision_data %>% filter(injury_type == input$severity & geography=="County" & name=="Region")})
-
-  metric_server(id="region", df=df_filter, vbl=input$severity)
+  output$bn_title <- renderText({
+    paste(input$severity, "Collisions")
+  })
+  
+  df_filter <- reactive({
+    collision_data %>% 
+      filter(injury_type == input$severity & geography=="County" & name=="Region")
+  })
+  
+  metric_server("region", 
+                df = reactive(df_filter()), 
+                vbl = reactive(input$severity))
   
 }
 
