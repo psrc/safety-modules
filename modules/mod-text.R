@@ -4,7 +4,7 @@ chart_text_ui <- function(id) {
   uiOutput(ns("chart_text_ui"))
 }
 
-chart_text_server <- function(id, df, vbl) {
+chart_text_server <- function(id, df, vbl, yr) {
  
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
@@ -15,13 +15,13 @@ chart_text_server <- function(id, df, vbl) {
     
     num <- reactive({
       df() %>% 
-        filter(year == 2022 & injury_type == vbl() & name == "Region") %>% 
+        filter(year == yr & injury_type == vbl() & name == "Region") %>% 
         select(injuries) %>% 
         pull()
     })
     
     output$chart_text <- renderText({
-      paste("In 2022, the total", vbl(), "totaled", num())
+      paste0("In ",yr,", the total ", vbl(), " totaled ", num(),".")
     })
     
   })

@@ -78,7 +78,9 @@ i {
   color: white;
 }
   
-
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  background-color: #F05A28;
+}
 
 .card.bg-success{
   background-color: #005753;
