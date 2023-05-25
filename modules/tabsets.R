@@ -1,6 +1,6 @@
-# metric module ----
+# Tabset Panel Visualization by Severity Type Module ----
 
-metric_ui <- function(id) {
+tabset_ui <- function(id) {
   ns <- NS(id)
   
   tagList(
@@ -54,12 +54,12 @@ metric_ui <- function(id) {
 
 }
 
-metric_server <- function(id, df, vbl, yr) {
+tabset_server <- function(id, df, vbl) {
   
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    chart_text_server('region_text', df, vbl, yr)
+    chart_text_server('region_text', df, vbl)
     plot_server("region_chart", df)
   })
   
