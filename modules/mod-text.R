@@ -15,7 +15,7 @@ chart_text_server <- function(id, df, vbl) {
     
     num <- reactive({
       df() %>% 
-        filter(year == latest_yr & injury_type == vbl() & name == "Region") %>% 
+        filter(year == latest_yr & geography=="County" & injury_type == vbl() & name == "Region") %>% 
         select(injuries) %>% 
         pull()
     })

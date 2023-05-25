@@ -9,7 +9,7 @@ leftpanel_ui <- function(id) {
   
 }
 
-leftpanel_server <- function(id, contact_name, contact_title, contact_phone, contact_email, photo_filename, df) {
+leftpanel_server <- function(id, contact_name, contact_title, contact_phone, contact_email, photo_filename) {
   
   moduleServer(id, function(input, output, session) { 
     ns <- session$ns
@@ -20,7 +20,7 @@ leftpanel_server <- function(id, contact_name, contact_title, contact_phone, con
         br(),
         selectInput("severity", 
                     "Select Severity Type", 
-                    choices = unique(df$injury_type),
+                    choices = unique(collision_data$injury_type),
                     selected = "Traffic Related Deaths"
         ),
         

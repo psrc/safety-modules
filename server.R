@@ -13,8 +13,7 @@ shinyServer(function(input, output, session) {
                    contact_phone = "206-389-2889",
                    contact_email = "chelmann@psrc.org",
                    contact_title = "Director of Data",
-                   photo_filename = "04_PR-Winter2022_Feature_SSA-Overview2.jpg",
-                   df=collision_data)
+                   photo_filename = "04_PR-Winter2022_Feature_SSA-Overview2.jpg")
   
   output$bn_title <- renderText({
     paste(input$severity)
@@ -22,7 +21,7 @@ shinyServer(function(input, output, session) {
   
   df_filter <- reactive({
     collision_data %>% 
-      filter(injury_type == input$severity & geography=="County" & name=="Region")
+      filter(injury_type == input$severity)
   })
   
   tabset_server("severity_type", 

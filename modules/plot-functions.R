@@ -1,6 +1,7 @@
 region_line <- function(df) {
   
   psrcplot:::make_interactive(static_line_chart(t=df %>%
+                                                  filter(geography=="County" & name=="Region") %>%
                                                   select("data_year", Injuries="injuries", `Collisions`="collisions") %>%
                                                   pivot_longer(!data_year),
                                                 x='data_year', y='value', fill='name', est="number",
