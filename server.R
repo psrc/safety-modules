@@ -24,6 +24,10 @@ shinyServer(function(input, output, session) {
       filter(injury_type == input$severity)
   })
   
+  chart_source <- reactive({
+    if (input$severity == "Serious Injury") {return("WSDOT")} else {return("WSTSC")}
+  })
+  
   tabset_server("severity_type", 
                 df = reactive(df_filter()), 
                 vbl = reactive(input$severity))

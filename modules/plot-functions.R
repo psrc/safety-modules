@@ -1,11 +1,10 @@
 region_line <- function(df) {
   
-  psrcplot:::make_interactive(static_line_chart(t=df %>%
-                                                  filter(geography=="County" & name=="Region") %>%
-                                                  select("data_year", Injuries="injuries", `Collisions`="collisions") %>%
-                                                  pivot_longer(!data_year),
-                                                x='data_year', y='value', fill='name', est="number",
+  psrcplot:::make_interactive(static_line_chart(t=df %>% filter(geography=="County" & name=="Region"),
+                                                x='data_year', y='injuries', fill='name', est="number",
                                                 lwidth = 2, color = "pgnobgy_5") +
+                                ggplot2::geom_point(colour = psrc_colors$pgnobgy_5[[2]], size = 3) +
+                                ggplot2::theme(legend.position = "none") +
                                 ggplot2::scale_y_continuous(limits=c(0,max(df$injuries)*1.25), labels=scales::label_comma()))
 }
 
