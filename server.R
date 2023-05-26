@@ -24,10 +24,6 @@ shinyServer(function(input, output, session) {
       filter(injury_type == input$severity)
   })
   
-  chart_source <- reactive({
-    if (input$severity == "Serious Injury") {return("WSDOT")} else {return("WSTSC")}
-  })
-  
   tabset_server("severity_type", 
                 df = reactive(df_filter()), 
                 vbl = reactive(input$severity))
@@ -46,4 +42,11 @@ shinyServer(function(input, output, session) {
   
   output$safety_text_7 <- renderText({safety_overview_7})
   
+  output$fatal_demographics <- renderEcharts4r({create_pictogram(df=fatal_by_race,
+                                                                 x="race",
+                                                                 vbl="fatality_rate",
+                                                                 icon_svg=fa_person,
+                                                                 title="Fatal Collision Rate by Race",
+                                                                 hover="Fatal Collisions per 100,000 people",
+                                                                 color= psrc_colors$pgnobgy_5[[1]])})
 })

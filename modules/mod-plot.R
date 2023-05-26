@@ -2,8 +2,7 @@
 plot_ui <- function(id) {
   
   tagList(
-  fluidRow(column(12, plotlyOutput(NS(id, "plot")))),
-  tags$div(class="chart_source",paste0("Source: "))
+  fluidRow(column(12, plotlyOutput(NS(id, "plot"))))
   ) # end of tag list
 }
 

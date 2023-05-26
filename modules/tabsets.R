@@ -44,13 +44,20 @@ tabset_ui <- function(id) {
                                       inline = TRUE),
                          chart_text_ui(ns('region_text')),
                          plot_ui(ns("region_chart")),
+                         tags$div(class="chart_source", chart_source_ui(ns("region_source"))),
                          h2("County"),
                          radioButtons("county_toggle", label = "Rate or Total",
                                       choices = list("Total" = "injuries", "Rate per 100k people" = "injury_rate_per_100k"),
                                       selected = "injuries",
                                       inline = TRUE),
                          ),
-                tabPanel('by Demographics')
+                tabPanel('by Demographics',
+                         br(),
+                         h2("Race and Ethnicity"),
+                         fluidRow(column(12,echarts4rOutput("fatal_demographics", height = "500px"))),
+                         tags$div(class="chart_source", chart_source_ui(ns("demographic_source"))),
+                         )
+
                 ) # end of tabset panel
                         
   
@@ -65,6 +72,10 @@ tabset_server <- function(id, df, vbl) {
 
     chart_text_server('region_text', df, vbl)
     plot_server("region_chart", df)
+    
+    # Dynamic Sources for various charts
+    chart_source_server('region_source', vbl)
+    chart_source_server('demographic_source', vbl)
   })
   
 }
